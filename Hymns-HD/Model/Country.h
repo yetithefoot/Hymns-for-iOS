@@ -8,6 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Country : NSObject
+@interface Country : NSObject{
+    NSString * _name;
+    NSString * _code;
+}
+
+@property(nonatomic, strong) NSString * code;
+@property(nonatomic, strong) NSString * name;
+
+-(id) initWithName: (NSString *) name andCode: (NSString*) code;
++(id) countryWithName: (NSString *) name andCode: (NSString*) code;
++(NSArray *) allCountries;
 
 @end
