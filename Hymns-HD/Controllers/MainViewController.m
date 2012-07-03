@@ -102,11 +102,11 @@
     {
         if (UIInterfaceOrientationIsLandscape(orientation)) 
         {
-            return CGSizeMake(170, 135);
+            return CGSizeMake(128, 128);
         }
         else
         {
-            return CGSizeMake(140, 110);
+            return CGSizeMake(128, 128);
         }
     }
     else
@@ -140,20 +140,18 @@
     
     NSString * key = [((Country *)[[Country allCountries] objectAtIndex:index]).code lowercaseString];
     UIImageView * view = [[UIImageView alloc]initWithImage:[UIImage imageNamed:key]];
-    //view.layer.masksToBounds = NO;
+    view.layer.masksToBounds = NO;
     //view.layer.cornerRadius = 8;
-    //view.layer.shadowColor = [[UIColor blackColor] CGColor];
-    //view.layer.shadowOffset = CGSizeMake(20, 20);
-    //view.layer.shadowRadius = 10;
+    
     
     cell.contentView = view;
+    //[[cell.contentView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
-    [[cell.contentView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
-    CGRect frame = CGRectMake(0, cell.contentView.bounds.size.height-30, cell.contentView.bounds.size.width, 30.0);
+    CGRect frame = CGRectMake(0, 98, 128, 30);
     
     UILabel *label = [[UILabel alloc] initWithFrame:frame];
-    label.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    //label.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     label.text =  ((Country *)[[Country allCountries] objectAtIndex:index]).name;
     label.textAlignment = UITextAlignmentCenter;
     label.backgroundColor = [UIColor clearColor];
@@ -163,7 +161,7 @@
     label.numberOfLines = 0;
     label.font = [UIFont boldSystemFontOfSize:13];
 
-    [cell.contentView addSubview:label];
+    [view addSubview:label];
     
     return cell;
 }
