@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
 
 @interface MainViewController : UIViewController
+
+@property(nonatomic, strong) AVAudioPlayer * player;
 
 @end

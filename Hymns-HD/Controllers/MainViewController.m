@@ -9,6 +9,7 @@
 #import "MainViewController.h"
 #import "GMGridView.h"
 #import "GMGridViewLayoutStrategies.h"
+#import <AVFoundation/AVFoundation.h>
 
 #import "Country.h"
 
@@ -24,6 +25,7 @@
 
 @implementation MainViewController
 
+@synthesize player;
 
 - (void)loadView 
 {
@@ -63,6 +65,11 @@
     [self.view addSubview:infoButton];
     
     
+}
+
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    [self.player stop];
 }
 
 - (void)presentInfo
@@ -179,6 +186,19 @@
 - (void)GMGridView:(GMGridView *)gridView didTapOnItemAtIndex:(NSInteger)position
 {
     NSLog(@"Did tap at index %d", position);
+    
+    Country * country = [[Country allCountries] objectAtIndex:position];
+    
+    NSString *soundFilePath = [[NSBundle mainBundle] pathForResource:country.code ofType:@"mp3"];
+    NSData * audioData = [NSData dataWithContentsOfFile:soundFilePath];
+    NSError * error = nil;
+
+    self.player = [[AVAudioPlayer alloc]initWithData:audioData error:&error];
+    if(!error)
+        [player play];
+    else 
+        NSLog(@"%@", error);
+    
 }
 
 - (void)GMGridViewDidTapOnEmptySpace:(GMGridView *)gridView
