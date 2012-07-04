@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 
-@interface MainViewController : UIViewController
+@interface MainViewController : UIViewController<AVAudioPlayerDelegate>
 
 @property(nonatomic, strong) AVAudioPlayer * player;
 

@@ -537,6 +537,8 @@
 		D0EAFE5E15A396CE00A2260E /* dz.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D0EAFE3F15A396CE00A2260E /* dz.mp3 */; };
 		D0EAFE5F15A396CE00A2260E /* dz.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D0EAFE3F15A396CE00A2260E /* dz.mp3 */; };
 		D0EAFE6015A396DD00A2260E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0EAFE2A15A3945700A2260E /* AVFoundation.framework */; };
+		D0EAFE8B15A48A8D00A2260E /* speaker.png in Resources */ = {isa = PBXBuildFile; fileRef = D0EAFE8A15A48A8D00A2260E /* speaker.png */; };
+		D0EAFE8C15A48A8D00A2260E /* speaker.png in Resources */ = {isa = PBXBuildFile; fileRef = D0EAFE8A15A48A8D00A2260E /* speaker.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -814,6 +816,7 @@
 		D0EAFE3D15A396CE00A2260E /* bh.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bh.mp3; sourceTree = "<group>"; };
 		D0EAFE3E15A396CE00A2260E /* bs.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bs.mp3; sourceTree = "<group>"; };
 		D0EAFE3F15A396CE00A2260E /* dz.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = dz.mp3; sourceTree = "<group>"; };
+		D0EAFE8A15A48A8D00A2260E /* speaker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = speaker.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -939,6 +942,7 @@
 		D0EAFB5415A317CC00A2260E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				D0EAFE8A15A48A8D00A2260E /* speaker.png */,
 				D0EAFE0E15A3295400A2260E /* background.png */,
 				D0EAFB5515A317CC00A2260E /* Flags */,
 			);
@@ -1538,6 +1542,7 @@
 				D0EAFE5A15A396CE00A2260E /* bh.mp3 in Resources */,
 				D0EAFE5C15A396CE00A2260E /* bs.mp3 in Resources */,
 				D0EAFE5E15A396CE00A2260E /* dz.mp3 in Resources */,
+				D0EAFE8B15A48A8D00A2260E /* speaker.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1801,6 +1806,7 @@
 				D0EAFE5B15A396CE00A2260E /* bh.mp3 in Resources */,
 				D0EAFE5D15A396CE00A2260E /* bs.mp3 in Resources */,
 				D0EAFE5F15A396CE00A2260E /* dz.mp3 in Resources */,
+				D0EAFE8C15A48A8D00A2260E /* speaker.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

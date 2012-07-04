@@ -16,6 +16,7 @@
 @interface MainViewController () <GMGridViewDataSource, GMGridViewActionDelegate>
 {
     __gm_weak GMGridView *_gmGridView;
+    UIImageView * _maskView;
 
 }
 
@@ -68,6 +69,10 @@
     [infoButton addTarget:self action:@selector(presentInfo) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:infoButton];
     
+    // init mask view
+    _maskView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"speaker"]];
+    _maskView.frame = CGRectMake(0, 0, 50, 50);
+    _maskView.alpha = 1;
     
 }
 
@@ -164,8 +169,9 @@
 
     }
     
+    Country * country = [[Country allCountries] objectAtIndex:index];
     
-    NSString * key = [((Country *)[[Country allCountries] objectAtIndex:index]).code lowercaseString];
+    NSString * key = [country.code lowercaseString];
     UIImageView * view = [[UIImageView alloc]initWithImage:[UIImage imageNamed:key]];
     view.layer.masksToBounds = NO;
     //view.layer.cornerRadius = 8;
@@ -174,12 +180,11 @@
     cell.contentView = view;
     //[[cell.contentView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
-    
     CGRect frame = CGRectMake(0, 98, 128, 30);
     
     UILabel *label = [[UILabel alloc] initWithFrame:frame];
     //label.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    label.text =  ((Country *)[[Country allCountries] objectAtIndex:index]).name;
+    label.text = country.name;
     label.textAlignment = UITextAlignmentCenter;
     label.backgroundColor = [UIColor clearColor];
     label.textColor = [UIColor lightGrayColor];
@@ -189,6 +194,10 @@
     label.font = [UIFont boldSystemFontOfSize:13];
 
     [view addSubview:label];
+    
+    if(self.player.playing && __lastClickedCell == index){
+        [cell.contentView addSubview:_maskView];
+    }
     
     return cell;
 }
@@ -202,6 +211,11 @@
 //////////////////////////////////////////////////////////////
 #pragma mark GMGridViewActionDelegate
 //////////////////////////////////////////////////////////////
+
+-(void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag{
+    [[AVAudioSession sharedInstance] setActive: NO error: nil];
+    [_maskView removeFromSuperview];
+}
 
 -(void)stopPlaying{
     [[AVAudioSession sharedInstance] setActive: NO error: nil];
@@ -227,15 +241,17 @@ int __lastClickedCell = NSNotFound;
 - (void)GMGridView:(GMGridView *)gridView didTapOnItemAtIndex:(NSInteger)position
 {
     NSLog(@"Did tap at index %d", position);
-    
-
+    [_maskView removeFromSuperview];
+    [self stopPlaying];
 
     BOOL wasPlaying = NO;
     if(self.player.playing) { wasPlaying = YES; }
     
-    if(wasPlaying && __lastClickedCell == position){
-        [self stopPlaying];
-    }else{
+    if(__lastClickedCell != position){
+        GMGridViewCell * cell = [gridView cellForItemAtIndex:position];
+        [cell.contentView addSubview:_maskView];
+        
+        
         Country * country = [[Country allCountries] objectAtIndex:position];
         [self startPlaying:country];
     }
