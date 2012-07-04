@@ -27,6 +27,10 @@
 
 @synthesize player;
 
+-(void)dealloc{
+    [[UIApplication sharedApplication] endReceivingRemoteControlEvents];
+}
+
 - (void)loadView 
 {
     [super loadView];
@@ -67,9 +71,25 @@
     
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+    
+    [self becomeFirstResponder];
+
+}
+- (BOOL) canBecomeFirstResponder {
+    return YES;
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self resignFirstResponder];
+}
+
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
-    [self.player stop];
+    //[self.player stop];
 }
 
 - (void)presentInfo
@@ -183,21 +203,44 @@
 #pragma mark GMGridViewActionDelegate
 //////////////////////////////////////////////////////////////
 
+-(void)stopPlaying{
+    [[AVAudioSession sharedInstance] setActive: NO error: nil];
+    [self.player stop];
+}
+
+-(void)startPlaying:(Country *)country{
+    NSString *soundFilePath = [[NSBundle mainBundle] pathForResource:[country.code lowercaseString] ofType:@"mp3"];
+    NSData * audioData = [NSData dataWithContentsOfFile:soundFilePath];
+    NSError * error = nil;
+    
+    self.player = [[AVAudioPlayer alloc]initWithData:audioData error:&error];
+    if(error == nil){
+        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
+        [[AVAudioSession sharedInstance] setActive: YES error: nil];
+        [player play];
+    }else{
+        NSLog(@"%@", error); 
+    }
+}
+
+int __lastClickedCell = NSNotFound;
 - (void)GMGridView:(GMGridView *)gridView didTapOnItemAtIndex:(NSInteger)position
 {
     NSLog(@"Did tap at index %d", position);
     
-    Country * country = [[Country allCountries] objectAtIndex:position];
-    
-    NSString *soundFilePath = [[NSBundle mainBundle] pathForResource:country.code ofType:@"mp3"];
-    NSData * audioData = [NSData dataWithContentsOfFile:soundFilePath];
-    NSError * error = nil;
 
-    self.player = [[AVAudioPlayer alloc]initWithData:audioData error:&error];
-    if(!error)
-        [player play];
-    else 
-        NSLog(@"%@", error);
+
+    BOOL wasPlaying = NO;
+    if(self.player.playing) { wasPlaying = YES; }
+    
+    if(wasPlaying && __lastClickedCell == position){
+        [self stopPlaying];
+    }else{
+        Country * country = [[Country allCountries] objectAtIndex:position];
+        [self startPlaying:country];
+    }
+    
+    __lastClickedCell = position;
     
 }
 
