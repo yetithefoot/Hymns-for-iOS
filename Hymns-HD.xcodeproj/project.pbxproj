@@ -545,9 +545,9 @@
 		20727BF49FD7449EB3849B6F /* Pods.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		586B3DA420EA45F0B9DCBB6D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D014576915A2F469005760D5 /* Hymns-HD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hymns-HD.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D014576D15A2F469005760D5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		D014576F15A2F469005760D5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		D014577115A2F469005760D5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		D014576D15A2F469005760D5 /* UIKit.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		D014576F15A2F469005760D5 /* Foundation.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D014577115A2F469005760D5 /* CoreGraphics.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		D014577515A2F469005760D5 /* Hymns-HD-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Hymns-HD-Info.plist"; sourceTree = "<group>"; };
 		D014577915A2F469005760D5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D014577B15A2F469005760D5 /* Hymns-HD-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Hymns-HD-Prefix.pch"; sourceTree = "<group>"; };
@@ -799,7 +799,7 @@
 		D0EAFE1B15A35C9C00A2260E /* hm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hm.png; sourceTree = "<group>"; };
 		D0EAFE1C15A35C9C00A2260E /* mk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mk.png; sourceTree = "<group>"; };
 		D0EAFE1D15A35C9C00A2260E /* pe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pe.png; sourceTree = "<group>"; };
-		D0EAFE2A15A3945700A2260E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		D0EAFE2A15A3945700A2260E /* AVFoundation.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D0EAFE3015A396CE00A2260E /* ad.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ad.mp3; sourceTree = "<group>"; };
 		D0EAFE3115A396CE00A2260E /* af.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = af.mp3; sourceTree = "<group>"; };
 		D0EAFE3215A396CE00A2260E /* ag.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ag.mp3; sourceTree = "<group>"; };
@@ -1227,6 +1227,7 @@
 				D014576615A2F469005760D5 /* Frameworks */,
 				D014576715A2F469005760D5 /* Resources */,
 				77156A2549DB4B889B72F277 /* Copy Pods Resources */,
+				33CF0DE181B44872A4587262 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1245,6 +1246,7 @@
 				D0EAFB3515A310B000A2260E /* Frameworks */,
 				D0EAFB3A15A310B000A2260E /* Resources */,
 				D0EAFB3D15A310B000A2260E /* Copy Pods Resources */,
+				53C692897CA246D8B78656A3 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1813,6 +1815,34 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		33CF0DE181B44872A4587262 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+		};
+		53C692897CA246D8B78656A3 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+		};
 		77156A2549DB4B889B72F277 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1871,6 +1901,7 @@
 /* Begin XCBuildConfiguration section */
 		D014578515A2F469005760D5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 20727BF49FD7449EB3849B6F /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
@@ -1897,6 +1928,7 @@
 		};
 		D014578615A2F469005760D5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 20727BF49FD7449EB3849B6F /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
@@ -1918,7 +1950,6 @@
 		};
 		D014578815A2F469005760D5 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 20727BF49FD7449EB3849B6F /* Pods.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/xcodeproj.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1934,7 +1965,6 @@
 		};
 		D014578915A2F469005760D5 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 20727BF49FD7449EB3849B6F /* Pods.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/xcodeproj.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1950,7 +1980,6 @@
 		};
 		D0EAFB3F15A310B000A2260E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 20727BF49FD7449EB3849B6F /* Pods.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/xcodeproj.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1966,7 +1995,6 @@
 		};
 		D0EAFB4015A310B000A2260E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 20727BF49FD7449EB3849B6F /* Pods.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/xcodeproj.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

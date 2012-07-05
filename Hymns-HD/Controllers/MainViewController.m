@@ -244,8 +244,6 @@ int __lastClickedCell = NSNotFound;
     [_maskView removeFromSuperview];
     [self stopPlaying];
 
-    BOOL wasPlaying = NO;
-    if(self.player.playing) { wasPlaying = YES; }
     
     if(__lastClickedCell != position){
         GMGridViewCell * cell = [gridView cellForItemAtIndex:position];
