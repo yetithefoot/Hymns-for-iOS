@@ -75,6 +75,7 @@
     _speakerView.alpha = 1;
     
     
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -235,11 +236,31 @@
     self.player = [[AVAudioPlayer alloc]initWithData:audioData error:&error];
     if(error == nil){
         self.player.delegate = self;
-        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
-        [[AVAudioSession sharedInstance] setActive: YES error: nil];
+        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:&error];
+        [[AVAudioSession sharedInstance] setActive: YES error: &error];
         [player play];
     }else{
         NSLog(@"%@", error); 
+    }
+}
+
+- (void)remoteControlReceivedWithEvent:(UIEvent *)event {
+    switch (event.subtype) {
+        case UIEventSubtypeRemoteControlTogglePlayPause:
+            if (!self.player.playing) {
+                [self.player play];
+            } else {
+                [self.player pause];
+            }
+            break;
+        case UIEventSubtypeRemoteControlPlay:
+            [self.player play];
+            break;
+        case UIEventSubtypeRemoteControlPause:
+            [self.player pause];
+            break;
+        default:
+            break;
     }
 }
 
