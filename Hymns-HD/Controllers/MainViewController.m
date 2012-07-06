@@ -16,7 +16,7 @@
 @interface MainViewController () <GMGridViewDataSource, GMGridViewActionDelegate>
 {
     __gm_weak GMGridView *_gmGridView;
-    UIImageView * _maskView;
+    UIImageView * _speakerView;
 
 }
 
@@ -70,9 +70,10 @@
     [self.view addSubview:infoButton];
     
     // init mask view
-    _maskView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"speaker"]];
-    _maskView.frame = CGRectMake(0, 0, 50, 50);
-    _maskView.alpha = 1;
+    _speakerView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"speaker"]];
+    _speakerView.frame = CGRectMake(0, 0, 50, 50);
+    _speakerView.alpha = 1;
+    
     
 }
 
@@ -195,8 +196,10 @@
 
     [view addSubview:label];
     
+    
+    
     if(self.player.playing && __lastClickedCell == index){
-        [cell.contentView addSubview:_maskView];
+        [cell.contentView addSubview:_speakerView];
     }
     
     return cell;
@@ -214,7 +217,8 @@
 
 -(void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag{
     [[AVAudioSession sharedInstance] setActive: NO error: nil];
-    [_maskView removeFromSuperview];
+    [_speakerView removeFromSuperview];
+    __lastClickedCell = NSNotFound;
 }
 
 -(void)stopPlaying{
@@ -229,6 +233,7 @@
     
     self.player = [[AVAudioPlayer alloc]initWithData:audioData error:&error];
     if(error == nil){
+        self.player.delegate = self;
         [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
         [[AVAudioSession sharedInstance] setActive: YES error: nil];
         [player play];
@@ -241,15 +246,15 @@ int __lastClickedCell = NSNotFound;
 - (void)GMGridView:(GMGridView *)gridView didTapOnItemAtIndex:(NSInteger)position
 {
     NSLog(@"Did tap at index %d", position);
-    [_maskView removeFromSuperview];
-    [self stopPlaying];
-
     
-    if(__lastClickedCell != position){
+    // if player is playing and clicked same song - stop
+    if((__lastClickedCell == position) && self.player.playing){
+        [_speakerView removeFromSuperview];
+        [self stopPlaying];
+        __lastClickedCell = NSNotFound;
+    }else{
         GMGridViewCell * cell = [gridView cellForItemAtIndex:position];
-        [cell.contentView addSubview:_maskView];
-        
-        
+        [cell.contentView addSubview:_speakerView];
         Country * country = [[Country allCountries] objectAtIndex:position];
         [self startPlaying:country];
     }
