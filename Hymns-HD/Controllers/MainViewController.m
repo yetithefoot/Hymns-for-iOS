@@ -157,9 +157,6 @@
 
 - (GMGridViewCell *)GMGridView:(GMGridView *)gridView cellForItemAtIndex:(NSInteger)index
 {
-    //NSLog(@"Creating view indx %d", index);
-    
-    //CGSize size = [self GMGridView:gridView sizeForItemsInInterfaceOrientation:[[UIApplication sharedApplication] statusBarOrientation]];
     
     GMGridViewCell *cell = [gridView dequeueReusableCellWithIdentifier:@"cell"];
     
@@ -175,17 +172,23 @@
     NSString * key = [country.code lowercaseString];
     UIImageView * view = [[UIImageView alloc]initWithImage:[UIImage imageNamed:key]];
     view.layer.masksToBounds = NO;
-    //view.layer.cornerRadius = 8;
     
     
     cell.contentView = view;
-    //[[cell.contentView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
     CGRect frame = CGRectMake(0, 98, 128, 30);
     
     UILabel *label = [[UILabel alloc] initWithFrame:frame];
-    //label.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     label.text = country.name;
+    
+#ifdef DEBUG
+    NSString *soundFilePath = [[NSBundle mainBundle] pathForResource:[country.code lowercaseString] ofType:@"mp3"];
+    label.text = [NSString stringWithFormat:@"%@ -%@", key, country.name];
+    if([[NSFileManager defaultManager] fileExistsAtPath:soundFilePath]){
+        label.text = [NSString stringWithFormat:@"+%@ -%@",  key, country.name];
+    }
+#endif
+    
     label.textAlignment = UITextAlignmentCenter;
     label.backgroundColor = [UIColor clearColor];
     label.textColor = [UIColor lightGrayColor];
@@ -195,8 +198,6 @@
     label.font = [UIFont boldSystemFontOfSize:13];
 
     [view addSubview:label];
-    
-    
     
     if(self.player.playing && __lastClickedCell == index){
         [cell.contentView addSubview:_speakerView];
@@ -227,7 +228,7 @@
 }
 
 -(void)startPlaying:(Country *)country{
-    NSString *soundFilePath = [[NSBundle mainBundle] pathForResource:[country.code lowercaseString] ofType:@"mp3"];
+    NSString *soundFilePath = [[NSBundle mainBundle] pathForResource:[country.code lowercaseString] ofType:@"caf"];
     NSData * audioData = [NSData dataWithContentsOfFile:soundFilePath];
     NSError * error = nil;
     
