@@ -8,6 +8,8 @@
 
 #import "Country.h"
 
+
+
 @implementation Country
 
 static NSMutableArray * countries;
@@ -175,7 +177,7 @@ static NSMutableArray * countries;
             [countries addObject:[Country countryWithName:@"Lithuania" andCode:@"LT"]];
             [countries addObject:[Country countryWithName:@"Luxembourg" andCode:@"LU"]];
             [countries addObject:[Country countryWithName:@"Latvia" andCode:@"LV"]];
-            [countries addObject:[Country countryWithName:@"Libyan Arab Jamahiriya" andCode:@"LY"]];
+            [countries addObject:[Country countryWithName:@"Libya" andCode:@"LY"]];
             [countries addObject:[Country countryWithName:@"Morocco" andCode:@"MA"]];
             [countries addObject:[Country countryWithName:@"Monaco" andCode:@"MC"]];
             [countries addObject:[Country countryWithName:@"Moldova" andCode:@"MD"]];

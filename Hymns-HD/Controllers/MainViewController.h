@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
+#import "GMGridView.h"
 
 @interface MainViewController : UIViewController<AVAudioPlayerDelegate>
 
@@ -15,3 +16,5 @@
 
 
 @end
+
+
